@@ -54,45 +54,29 @@ Spotify's own audio stream is locked, so most visualizers can't see it. This one
 git clone https://github.com/likhith825/music-visualizer.git
 ```
 
-### 3. Install the two Python packages it uses
+### 3. Run the soundcheck (one time)
 
-1. Open the visualizer folder in File Explorer.
-2. Right-click an empty space in the folder → **Open in Terminal**.
-3. Run:
-   ```
-   pip install -r requirements.txt
-   ```
-   This installs **numpy** (for the sound maths) and **PyAudioWPatch** (a ~100 KB package that records what your speakers play).
+In the visualizer folder, double-click **`soundcheck.bat`**. It:
+1. Checks that Python is installed.
+2. Installs the two packages it needs: **numpy** (for the sound maths) and **PyAudioWPatch** (a ~100 KB package that records what your speakers play).
+3. Puts a **Music Visualizer** shortcut with the neon icon on your desktop.
+4. Opens the visualizer as an app.
 
-If it says `'pip' is not recognized`, use `python -m pip install -r requirements.txt` instead.
+**From then on, just double-click the Music Visualizer icon on your desktop,** like any other app. Then **play something in Spotify** (or anywhere) and watch it go.
 
-### 4. Start it
+You can also right-click the desktop icon and pin it to Start or the taskbar. If you ever move the visualizer folder, run `soundcheck.bat` again to fix the shortcut.
 
-- **Easiest:** double-click **`play.bat`**. It opens the visualizer in your web browser (and installs the packages if you skipped step 3).
-- **As an app window:** in the terminal from step 3, run:
+**Start it when you log in (optional):** press `Win + R`, type `shell:startup`, press Enter, and copy the desktop shortcut into the folder that opens.
+
+### Other ways to start it
+
+- **In your web browser:** double-click **`play.bat`**. It opens `http://127.0.0.1:8765` in your normal browser.
+- **From a terminal** (in the visualizer folder):
   ```
+  pip install -r requirements.txt
   pythonw ears.py --app
   ```
-
-Then **play something in Spotify** (or anywhere) and watch it go.
-
-### 5. Optional: a desktop shortcut
-
-Make an icon you can double-click, like any other app:
-
-1. In Terminal, run `where pythonw` and copy the path it prints, for example:
-   `C:\Users\YourName\AppData\Local\Programs\Python\Python313\pythonw.exe`
-2. Right-click your desktop → **New** → **Shortcut**.
-3. For the location, enter the pythonw path, then the path to `ears.py`, then `--app`, with quotes around both paths:
-   ```
-   "C:\Users\YourName\AppData\Local\Programs\Python\Python313\pythonw.exe" "D:\music-visualizer\ears.py" --app
-   ```
-4. Click **Next**, name it **Music Visualizer**, and click **Finish**.
-5. To give it the neon icon: right-click the shortcut → **Properties** → **Change Icon…** → **Browse…** → pick `neon.ico` from the visualizer folder → **OK**.
-
-You can also right-click the shortcut and pin it to Start or the taskbar.
-
-**Start it when you log in (optional):** press `Win + R`, type `shell:startup`, press Enter, and copy the shortcut into the folder that opens.
+  Use `python ears.py --open` to open it in the browser instead.
 
 ## Using it
 
@@ -138,6 +122,7 @@ Spotify → speakers ─┐
 | `ears.py` | Listens to what your PC plays, measures it and streams the numbers to the page |
 | `lightshow.js` | Draws the visuals from those numbers |
 | `stage.html` | The page the show runs on |
+| `soundcheck.bat` | One-time setup: installs packages, adds the desktop shortcut, starts the app |
 | `play.bat` | Double-click to start it in your browser |
 | `neon.ico` | The app icon |
 | `requirements.txt` | The two Python packages it needs |
@@ -149,6 +134,7 @@ Spotify → speakers ─┐
 |---|---|
 | `'python' is not recognized` | Python isn't on your PATH. Re-run the Python installer, choose **Modify**, and tick **Add Python to environment variables**. Or reinstall with **"Add python.exe to PATH"** ticked. |
 | `pip install` fails | Try `python -m pip install -r requirements.txt`. Make sure you're connected to the internet. |
+| The desktop icon stopped working | You probably moved the visualizer folder. Run `soundcheck.bat` again to point the shortcut at the new place. |
 | The bars don't move | Check that sound is actually coming out of your speakers or headphones, and that the volume in Spotify isn't at zero. If you switch output devices, it picks up the new one within a few seconds of silence. |
 | No song name | It only shows while Spotify (the desktop app) is playing. Ads and podcasts may not show one. |
 | Beat feels late or early | Press `]` (earlier) or `[` (later) a few times. Bluetooth headphones usually need a few presses of `]`. |
