@@ -1,0 +1,6 @@
+# Generated while running
+ears.log
+__pycache__/
+
+# Shortcuts hold paths specific to one computer
+*.lnk

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Music Visualizer</title>
+  <link rel="icon" href="neon.ico">
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; }
+    body { background: radial-gradient(ellipse at 50% 55%, hsl(var(--h, 230) 60% 10%), #030307 70%); }
+    canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; }
+    /* The glow: a tiny copy of the main canvas, stretched (which blurs it) and screened on top. */
+    #glow { mix-blend-mode: screen; pointer-events: none; }
+    #ui { font: 14px/1.4 "Segoe UI", system-ui, sans-serif; color: #fff; transition: opacity .4s; }
+    #ui.hidden { opacity: 0; }
+    #status { position: fixed; top: 16px; left: 16px; opacity: .55; display: flex; align-items: center; gap: 8px; }
+    #dot { width: 8px; height: 8px; border-radius: 50%; background: #e44; }
+    #dot.on { background: #3d6; box-shadow: 0 0 8px #3d6; }
+    #help { position: fixed; top: 16px; right: 16px; opacity: .35; }
+    #song { position: fixed; left: 28px; bottom: 24px; max-width: calc(100vw - 56px);
+            opacity: 0; transition: opacity 1.5s; }
+    #artist { font-size: 13px; letter-spacing: .3em; text-transform: uppercase; opacity: .7; }
+    #title { font-size: 30px; font-weight: 700; text-shadow: 0 0 20px rgba(255, 255, 255, .35);
+             white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    @media (max-width: 700px) { #help { display: none; } #title { font-size: 22px; } }
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <canvas id="glow"></canvas>
+  <div id="ui">
+    <div id="status"><span id="dot"></span><span id="statusText">Connecting…</span></div>
+    <div id="help">1–4 / Space: mode · [ ]: beat sync · F: fullscreen · H: hide</div>
+    <div id="song"><div id="artist"></div><div id="title"></div></div>
+  </div>
+  <script src="lightshow.js"></script>
+</body>
+</html>
